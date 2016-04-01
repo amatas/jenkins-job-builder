@@ -2002,6 +2002,64 @@ def shining_panda(parser, xml_parent, data):
     XML.SubElement(t, 'ignoreExitCode').text = str(ignore_exit_code).lower()
 
 
+def docker_builder(parser, xml_parent, data):
+    """yaml: docker-builder
+    Use Docker to build a container
+    :arg str repo-name: Id of script to execute (required)
+       :language: yaml
+    """
+    t = XML.SubElement(xml_parent, "com.cloudbees.dockerpublish.DockerBuilder")
+    try:
+        repoName = data.get('repo-name')
+    except KeyError:
+        raise JenkinsJobsException("'repo-name' argument is required for"
+                                   " 'docker_builder' pluging")
+
+    if 'server' in data:
+        server = XML.SubElement(t, 'server')
+        XML.SubElement(server, 'uri').text = data.get('server')
+    else:
+        XML.SubElement(t, 'server')
+
+    if 'registry' in data:
+        server = XML.SubElement(t, 'registry')
+        XML.SubElement(server, 'url').text = data.get('registry')
+    else:
+        XML.SubElement(t, 'registry')
+
+    XML.SubElement(t, 'repoName').text = repoName
+    XML.SubElement(t, 'noCache').text = \
+        str(data.get('no-cache', False)).lower()
+    XML.SubElement(t, 'forcePull').text = \
+        str(data.get('force-pull', True)).lower()
+    XML.SubElement(t, 'skipBuild').text = \
+        str(data.get('skip-build', False)).lower()
+    XML.SubElement(t, 'skipDecorate').text = \
+        str(data.get('skip-decorate', False)).lower()
+    XML.SubElement(t, 'repoTag').text = data.get('repo-tag', '')
+    XML.SubElement(t, 'skipPush').text = \
+        str(data.get('skip-push', False)).lower()
+    XML.SubElement(t, 'createFingerprint').text = \
+        str(data.get('create-fingerprint', True)).lower()
+    XML.SubElement(t, 'skipTagLatest').text = \
+        str(data.get('skip-tag-latest', False)).lower()
+
+    if 'build-additional-args' in data:
+        XML.SubElement(t, 'buildAdditionalArgs').text = \
+            data.get('build-additional-args')
+
+    if 'build-context' in data:
+        XML.SubElement(t, 'buildContext').text = \
+            data.get('build-context', '')
+
+    if 'dockerfile-path' in data:
+        XML.SubElement(t, 'dockerfilePath').text = \
+            data.get('dockerfile-path', '')
+
+    XML.SubElement(t, 'forceTag').text = \
+        str(data.get('force-tag', True)).lower()
+
+
 def tox(parser, xml_parent, data):
     """yaml: tox
     Use tox to build a multi-configuration project. Requires the Jenkins

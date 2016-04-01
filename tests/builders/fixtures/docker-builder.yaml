@@ -1,0 +1,17 @@
+builders:
+  - docker-builder:
+      server: "unix:///var/run/docker.sock"
+      registry: "http://registry:8080/"
+      repo-name: "repo/name"
+      no-cache: true
+      force-pull: true
+      skip-build: false
+      skip-decorate: false
+      repo-tag: "repotag"
+      skip-push: true
+      create-fingerprint: true
+      skip-tag-latest: false
+      build-additional-args: "--args"
+      build-context: "dockercontext"
+      dockerfile-path: "Dockerfilepath"
+      force-tag: true

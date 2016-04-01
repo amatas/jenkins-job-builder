@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+  <builders>
+    <com.cloudbees.dockerpublish.DockerBuilder>
+      <server>
+        <uri>unix:///var/run/docker.sock</uri>
+      </server>
+      <registry>
+        <url>http://registry:8080/</url>
+      </registry>
+      <repoName>repo/name</repoName>
+      <noCache>true</noCache>
+      <forcePull>true</forcePull>
+      <skipBuild>false</skipBuild>
+      <skipDecorate>false</skipDecorate>
+      <repoTag>repotag</repoTag>
+      <skipPush>true</skipPush>
+      <createFingerprint>true</createFingerprint>
+      <skipTagLatest>false</skipTagLatest>
+      <buildAdditionalArgs>--args</buildAdditionalArgs>
+      <buildContext>dockercontext</buildContext>
+      <dockerfilePath>Dockerfilepath</dockerfilePath>
+      <forceTag>true</forceTag>
+    </com.cloudbees.dockerpublish.DockerBuilder>
+  </builders>
+</project>
