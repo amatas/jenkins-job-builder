@@ -2,6 +2,7 @@ builders:
   - docker-builder:
       server: "unix:///var/run/docker.sock"
       registry: "http://registry:8080/"
+      registry_credentials: "jenkins-docker-registry"
       repo-name: "repo/name"
       no-cache: true
       force-pull: true

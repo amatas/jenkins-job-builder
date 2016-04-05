@@ -2024,6 +2024,9 @@ def docker_builder(parser, xml_parent, data):
     if 'registry' in data:
         server = XML.SubElement(t, 'registry')
         XML.SubElement(server, 'url').text = data.get('registry')
+        if 'registry_credentials' in data:
+            XML.SubElement(server, 'credentialsId').text = \
+                data.get('registry_credentials')
     else:
         XML.SubElement(t, 'registry')
 

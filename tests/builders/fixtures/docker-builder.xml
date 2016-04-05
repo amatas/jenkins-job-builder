@@ -7,6 +7,7 @@
       </server>
       <registry>
         <url>http://registry:8080/</url>
+        <credentialsId>jenkins-docker-registry</credentialsId>
       </registry>
       <repoName>repo/name</repoName>
       <noCache>true</noCache>
